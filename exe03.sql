@@ -30,3 +30,18 @@ SELECT * FROM tb_alunos WHERE nota_mediaFinal > 7.00;
 SELECT * FROM tb_alunos WHERE nota_mediaFinal < 7.00;
 
 UPDATE tb_alunos SET passou_de_ano = 0 WHERE id = 6;
+
+ALTER TABLE tb_alunos ADD COLUMN curso bigint;
+ALTER TABLE tb_alunos ADD CONSTRAINT fk_curso FOREIGN KEY (curso) REFERENCES tb_classes_extracurriculares(id_classe);
+ALTER TABLE tb_alunos DROP CONSTRAINT fk_curso;
+
+UPDATE tb_alunos SET curso = 1 WHERE id = 6;
+UPDATE tb_alunos SET curso = 3 WHERE id = 4;
+UPDATE tb_alunos SET curso = 2 WHERE id = 1;
+UPDATE tb_alunos SET curso = 4 WHERE id = 2;
+UPDATE tb_alunos SET curso = 3 WHERE id = 3;
+UPDATE tb_alunos SET curso = 2 WHERE id = 5;
+UPDATE tb_alunos SET curso = 1 WHERE id = 7;
+UPDATE tb_alunos SET curso = 4 WHERE id = 8;
+
+SELECT * FROM tb_alunos AS alunos INNER JOIN tb_classes_extracurriculares AS classes ON (alunos.curso = classes.id_classe);
